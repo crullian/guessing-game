@@ -1,0 +1,41 @@
+@media screen and (min-width: 480px) {
+  
+  /******************************
+  GENERAL
+  *******************************/
+  
+  input[type="text"] {
+    margin-left: 37%;
+  }
+}  
+  
+@media screen and (min-width: 660px) {
+  
+  /******************************
+  HEADER
+  *******************************/
+  
+  
+  
+  #logo {
+    float: left;
+    margin-left: 5%;
+    text-align: left;
+    width: 90%;
+  }
+  
+  h1 {
+    font-size: 3.5em;
+  }
+  
+  h2 {
+    font-size: 0.825em;
+    margin-bottom: 20px;
+  }
+  
+  header {
+    border-bottom: 5px solid #854F93;
+    margin-bottom: 80px;
+  }
+}
+
