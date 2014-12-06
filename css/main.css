@@ -28,29 +28,65 @@ input[type="text"] {
 }
 input[type="text"]:focus {
   border: solid 1px #9A5DD2;
-  border
-  box-shadow: 0 0 5px 1px #9A5DD2; 
+  box-shadow: 0 0 5px 1px #9A5DD2;
+  outline: none; 
+}
+
+.status {
+  display: none;
+  text-align: center;
+  font-size: 2em;
+  margin-top: 10px;
+  margin-bottom: 0; 
 }
 
 #buttons {
-  margin: 10% 20% 10% 20%;
+  width: 165px;
+  margin: 5% 20% 10% 20%;
+}
+button {
+  outline: none;
 }
 
 .submit {
+  width: 157px;
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  border: none;
+  background-color: #BADA55;
+  color: #fff;
+}
+.submit:focus {
+  box-shadow: 0 0 9px 3px #9A5DD2;
+}
+.again {
+  width: 92px;
   height: 40px;
-  border-radius: 14px;
+  border-radius: 20px;
+  border: none;
   background-color: rgba(175, 0, 214, 1);
   color: #fff;
 }
-.again {
+.again:focus {
+  box-shadow: 0 0 9px 3px #BADA55;
+}
+
+.hint {
+  width: 58px;
   height: 40px;
-  border-radius: 14px;
+  border-radius: 20px;
+  border: none;
   background-color: rgba(175, 0, 214, 1);
   color: #fff;
+  float: right;
+}
+.hint:focus {
+  box-shadow: 0 0 9px 3px #BADA55;
 }
 
 /******************************
-HEADING
+HEADER
 *******************************/
 
 header {
@@ -93,7 +129,7 @@ footer {
   font-size: 0.75em;
   text-align: center;
   clear: both;
-  padding-top: 50px;
+  padding-top: 30px;
   color: #ccc;
 }
 
@@ -111,7 +147,7 @@ COLORS
 
 /* site body */
 body {
-  background-color: #fff;
+  background-color: #A4A4A4;
   color: #999;
 }
 

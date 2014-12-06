@@ -5,11 +5,16 @@
   *******************************/
   
   input[type="text"] {
-    margin-left: 37%;
+    margin: 0 37% 3%;
   }
+
+  .status {
+    margin-bottom: 10px;
+  }
+  
   #buttons {
-    width: 157px;
-    margin: 10% 41.5%;
+    width: 162px;
+    margin: 3% 41.5% 8% 41.5%
   }
 }  
   
