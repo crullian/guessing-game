@@ -57,9 +57,9 @@ $(document).ready(function() {
     } else if (userInput > theNumber) {
 
       //message = "Guess lower"
-      if ((userInput - theNumber) >= 49) {
+      if ((userInput - theNumber) >= 50) {
         message = "You're ice cold, guess lower";
-      } else if ((userInput - theNumber) < 48 && (userInput - theNumber) > 20) {
+      } else if ((userInput - theNumber) < 49 && (userInput - theNumber) > 20) {
         message = "You're cold, guess lower";
       } else if ((userInput - theNumber) <= 20 && (userInput - theNumber) > 10) {
         message = "Getting warm, guess lower";
