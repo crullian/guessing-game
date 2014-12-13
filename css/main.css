@@ -43,7 +43,9 @@ input[type="text"]:focus {
   margin-top: 10px;
   margin-bottom: 0; 
 }
-
+.blinking {
+  text-shadow: 0px 0px 30px fuchsia;
+}
 
 
 #buttons {

@@ -1,12 +1,17 @@
+"use strict";
+
 $(document).ready(function() {
 
   var theNumber = Math.floor(Math.random() * 100) + 1; // create random number
-  console.log("The number is " + theNumber);
   var message = "";
   var numberOfGuesses = 5;
   var guessList = [];
+  var interval;
 
-  $(".guessesLeft").text(5);
+
+  console.log("The number is " + theNumber);
+
+  $(".guessesLeft").text(numberOfGuesses + " guesses");
 
   $("#userInput").keydown(function(event) { // Press enter to submit guess
     if (event.keyCode == 13) {
@@ -16,33 +21,82 @@ $(document).ready(function() {
 
   $("#buttons").on("click", ".submit", function(event) { // click to submit guess
     var userInput = +$("#userInput").val(); // get user input value, change to number
-    guessList.push(userInput);
-    console.log(guessList);
+
+    if (guessList.indexOf(userInput) != -1) {
+
+      message = "You've already guessed that, try again";
+      $(".status").text(message).slideDown().fadeOut(3000);
+      $("#userInput").val("");
+      return;
+    } else {
+
+      guessList.push(userInput);
+      console.log(guessList);
+    }
+
+
 
     if (userInput != Math.floor(userInput) || userInput == "") { // if not an integer, or no input
       guessList.pop();
       message = "Please submit an integer!";
 
-    } else if (userInput === theNumber) {
-
-      message = "Correct!";
-
     } else if (userInput < theNumber) {
 
-      message = "Guess higher"
-
+      //message = "Guess higher"
+      if ((theNumber - userInput) >= 50) {
+        message = "You're ice cold, guess higher";
+      } else if ((theNumber - userInput) < 49 && (theNumber - userInput) > 20) {
+        message = "You're cold, guess higher";
+      } else if ((theNumber - userInput) <= 20 && (theNumber - userInput) > 10) {
+        message = "You're warm, guess higher";
+      } else if ((theNumber - userInput) <= 10 && (theNumber - userInput) > 4) {
+        message = "You're hot, guess higher";
+      } else if ((theNumber - userInput) <= 4 && (theNumber - userInput) >= 1) {
+        message = "You're red hot, guess higher";
+      }
     } else if (userInput > theNumber) {
 
-      message = "Guess lower"
+      //message = "Guess lower"
+      if ((userInput - theNumber) >= 49) {
+        message = "You're ice cold, guess lower";
+      } else if ((userInput - theNumber) < 48 && (userInput - theNumber) > 20) {
+        message = "You're cold, guess lower";
+      } else if ((userInput - theNumber) <= 20 && (userInput - theNumber) > 10) {
+        message = "Getting warm, guess lower";
+      } else if ((userInput - theNumber) <= 10 && (userInput - theNumber) > 4) {
+        message = "You're hot, guess lower";
+      } else if ((userInput - theNumber) <= 4 && (userInput - theNumber) >= 1) {
+        message = "You're red hot, guess lower";
+      }
 
+    } else if (userInput === theNumber) {
+      interval = setInterval(function() {
+        $('.status').toggleClass('blinking');
+      }, 200);
+      $(".submit").on('click', function() {
+        $(this).prop("disabled", true);
+      });
+      message = "Correct, nice work! Play Again!";
     }
 
-    $(".guessesLeft").text(numberOfGuesses - guessList.length);
 
-    if (guessList.length === numberOfGuesses) {
-      message = "Game over, play again!";
-      $(".status").text(message).slideDown();
-      return;
+    if (guessList.length === numberOfGuesses - 1) { // let the user know how many guesses are left
+      $(".guessesLeft").text((numberOfGuesses - guessList.length) + " guess");
+    } else {
+
+      $(".guessesLeft").text((numberOfGuesses - guessList.length) + " guesses");
+    }
+
+
+
+    if (guessList.length === numberOfGuesses) { // when a user reaches the allowed  number of guesses
+
+      $(".status").text("Game over, play again!").slideDown();
+      //$("#userInput").val("");
+      $(".submit").on('click', function() {
+        $(this).prop("disabled", true);
+      });
+      //return;
     }
 
     $(".status").text(message).slideDown().fadeOut(3000); // create mmessage to user
@@ -61,15 +115,20 @@ $(document).ready(function() {
     theNumber = Math.floor(Math.random() * 100) + 1;
     console.log("The number is " + theNumber);
     message = "You started a new game!";
-    numberOfGuesses = 5;
+    numberOfGuesses;
     guessList = [];
     $("#userInput").val("");
-    $(".guessesLeft").text(5);
+    $(".guessesLeft").text(numberOfGuesses + " guesses");
     $(".status").text(message).slideDown().fadeOut(3000);
+    $(".submit").on('click', function() {
+      $(this).prop("disabled", false); // re-enables buttons
+    });
+    clearInterval(interval); // resets to not blinking
+    $(".blinking").toggleClass("status"); // resets the text shadow
   }
 
   $("#buttons").on("click", ".again", function() {
-    return resetGame();
+    resetGame();
   });
 
 
