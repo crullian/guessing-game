@@ -23,18 +23,14 @@ $(document).ready(function() {
     var userInput = +$("#userInput").val(); // get user input value, change to number
 
     if (guessList.indexOf(userInput) != -1) {
-
       message = "You've already guessed that, try again";
       $(".status").text(message).slideDown().fadeOut(3000);
       $("#userInput").val("");
       return;
     } else {
-
       guessList.push(userInput);
       console.log(guessList);
     }
-
-
 
     if (userInput != Math.floor(userInput) || userInput == "") { // if not an integer, or no input
       guessList.pop();
@@ -130,6 +126,8 @@ $(document).ready(function() {
   $("#buttons").on("click", ".again", function() {
     resetGame();
   });
-
-
 });
+
+
+
+// end
