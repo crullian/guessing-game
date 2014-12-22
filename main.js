@@ -1,6 +1,6 @@
-"use strict";
-
 $(document).ready(function() {
+
+  "use strict";
 
   var theNumber = Math.floor(Math.random() * 100) + 1; // create random number
   var message = "";
@@ -19,6 +19,8 @@ $(document).ready(function() {
     }
   });
 
+
+
   $("#buttons").on("click", ".submit", function(event) { // click to submit guess
     var userInput = +$("#userInput").val(); // get user input value, change to number
 
@@ -32,7 +34,7 @@ $(document).ready(function() {
       console.log(guessList);
     }
 
-    if (userInput != Math.floor(userInput) || userInput == "") { // if not an integer, or no input
+    if (userInput != Math.floor(userInput) || userInput === null) { // if not an integer, or no input
       guessList.pop();
       message = "Please submit an integer!";
 
@@ -103,6 +105,8 @@ $(document).ready(function() {
 
   });
 
+
+
   $("#buttons").on("click", ".hint", function() {
     $(".status").text("the number is " + theNumber).slideDown().fadeOut(2000);
   });
@@ -111,7 +115,7 @@ $(document).ready(function() {
     theNumber = Math.floor(Math.random() * 100) + 1;
     console.log("The number is " + theNumber);
     message = "You started a new game!";
-    numberOfGuesses;
+    numberOfGuesses = 5;
     guessList = [];
     $("#userInput").val("");
     $(".guessesLeft").text(numberOfGuesses + " guesses");
