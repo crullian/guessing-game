@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 
   $("#buttons").on("click", ".submit", function(event) { // click to submit guess
-    var userInput = +$("#userInput").val(); // get user input value, change to number
+    var userInput = +$("#userInput").val(); // get user input value, change to number input type = number
 
     if (guessList.indexOf(userInput) != -1) {
       message = "You've already guessed that, try again";
@@ -34,7 +34,9 @@ $(document).ready(function() {
       console.log(guessList);
     }
 
-    if (userInput != Math.floor(userInput) || userInput === null) { // if not an integer, or no input
+
+
+    if (userInput != Math.floor(userInput) || userInput === 0) { // if not an integer, or no input
       guessList.pop();
       message = "Please submit an integer!";
 
@@ -77,6 +79,15 @@ $(document).ready(function() {
       message = "Correct, nice work! Play Again!";
     }
 
+    if (guessList.length === numberOfGuesses) { // when a user reaches the allowed  number of guesses
+      message = "Game over, play again!";
+      //$(".status").text("Game over, play again!").slideDown();
+      //$("#userInput").val("");
+      $(".submit").on('click', function() {
+        $(this).prop("disabled", true);
+      });
+      //return;
+    }
 
     if (guessList.length === numberOfGuesses - 1) { // let the user know how many guesses are left
       $(".guessesLeft").text((numberOfGuesses - guessList.length) + " guess");
@@ -86,16 +97,6 @@ $(document).ready(function() {
     }
 
 
-
-    if (guessList.length === numberOfGuesses) { // when a user reaches the allowed  number of guesses
-
-      $(".status").text("Game over, play again!").slideDown();
-      //$("#userInput").val("");
-      $(".submit").on('click', function() {
-        $(this).prop("disabled", true);
-      });
-      //return;
-    }
 
     $(".status").text(message).slideDown().fadeOut(3000); // create mmessage to user
 
