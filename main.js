@@ -65,7 +65,7 @@ $(document).ready(function() {
       }
 
     } else if (userInput === theNumber) {
-      message = "Correct, nice work! Play Again!";
+      message = "Correct, Woo Hoo! Play Again!";
       interval = setInterval(function() {
         $('.status').toggleClass('blinking');
       }, 200);
