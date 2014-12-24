@@ -8,7 +8,6 @@ $(document).ready(function() {
   var guessList = [];
   var interval;
 
-
   console.log("The number is " + theNumber);
 
   $(".guessesLeft").text(numberOfGuesses + " guesses");
@@ -18,8 +17,6 @@ $(document).ready(function() {
       $(".submit").trigger("click");
     }
   });
-
-
 
   $("#buttons").on("click", ".submit", function(event) { // click to submit guess
     var userInput = +$("#userInput").val(); // get user input value, change to number input type = number
@@ -33,8 +30,6 @@ $(document).ready(function() {
       guessList.push(userInput);
       console.log(guessList);
     }
-
-
 
     if (userInput != Math.floor(userInput) || userInput === 0) { // if not an integer, or no input
       guessList.pop();
@@ -70,16 +65,16 @@ $(document).ready(function() {
       }
 
     } else if (userInput === theNumber) {
+      message = "Correct, nice work! Play Again!";
       interval = setInterval(function() {
         $('.status').toggleClass('blinking');
       }, 200);
       $(".submit").on('click', function() {
         $(this).prop("disabled", true);
       });
-      message = "Correct, nice work! Play Again!";
     }
 
-    if (guessList.length === numberOfGuesses) { // when a user reaches the allowed  number of guesses
+    if (guessList.length === numberOfGuesses && userInput != theNumber) { // when a user reaches the allowed  number of guesses
       message = "Game over, play again!";
       //$(".status").text("Game over, play again!").slideDown();
       //$("#userInput").val("");
@@ -96,8 +91,6 @@ $(document).ready(function() {
       $(".guessesLeft").text((numberOfGuesses - guessList.length) + " guesses");
     }
 
-
-
     $(".status").text(message).slideDown().fadeOut(3000); // create mmessage to user
 
     $("#userInput").val(""); // clear input field
@@ -106,31 +99,30 @@ $(document).ready(function() {
 
   });
 
-
-
   $("#buttons").on("click", ".hint", function() {
     $(".status").text("the number is " + theNumber).slideDown().fadeOut(2000);
+
   });
 
   function resetGame() {
     theNumber = Math.floor(Math.random() * 100) + 1;
     console.log("The number is " + theNumber);
-    message = "You started a new game!";
     numberOfGuesses = 5;
     guessList = [];
+    clearInterval(interval); // resets to not blinking
+    $(".blinking").toggleClass("status"); // resets the text shadow
     $("#userInput").val("");
     $(".guessesLeft").text(numberOfGuesses + " guesses");
-    $(".status").text(message).slideDown().fadeOut(3000);
+    $(".status").text("You started a new game!").slideDown().fadeOut(3000);
     $(".submit").on('click', function() {
       $(this).prop("disabled", false); // re-enables buttons
     });
-    clearInterval(interval); // resets to not blinking
-    $(".blinking").toggleClass("status"); // resets the text shadow
   }
 
   $("#buttons").on("click", ".again", function() {
     resetGame();
   });
+
 });
 
 
