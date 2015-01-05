@@ -98,6 +98,11 @@ button {
   font-size: 18px;
 }
 
+.guessList {
+  text-align: center;
+  color: #696969;
+}
+
 /******************************
 HEADER
 *******************************/
